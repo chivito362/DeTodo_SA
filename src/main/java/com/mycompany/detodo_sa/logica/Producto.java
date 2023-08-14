@@ -2,7 +2,7 @@
 package com.mycompany.detodo_sa.logica;
 
 
-public class Producto {
+public class Producto implements Comparable<Producto>{
 private int codigo_prod;
 private String desc;
 private double precio;
@@ -58,6 +58,17 @@ private Categoria rubro;
 
     public void setRubro(Categoria rubro) {
         this.rubro = rubro;
+    }
+
+    @Override
+    public int compareTo(Producto o) {
+       if(codigo_prod== o.codigo_prod){
+           return 0;
+       }else if(codigo_prod > o.codigo_prod){
+           return 1;
+       }else{
+           return -1;
+       }
     }
      
 
