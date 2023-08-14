@@ -10,6 +10,7 @@ public class main {
         Menu_General menu=new Menu_General();
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);
+        
     }
 
 }
