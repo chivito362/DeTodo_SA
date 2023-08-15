@@ -14,7 +14,7 @@ import java.util.TreeSet;
  */
 public class Menu_General extends javax.swing.JFrame {
 
-    public static TreeSet ListaProd=new TreeSet<>();
+    public static TreeSet<Producto> ListaProd=new TreeSet<>();
     
     public Menu_General() {
         initComponents();

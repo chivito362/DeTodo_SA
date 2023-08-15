@@ -61,6 +61,11 @@ private Categoria rubro;
     }
 
     @Override
+    public String toString() {
+        return "Producto{" + "codigo_prod=" + codigo_prod + ", desc=" + desc + ", precio=" + precio + ", stock=" + stock + ", rubro=" + rubro + '}';
+    }
+
+    @Override
     public int compareTo(Producto o) {
        if(codigo_prod== o.codigo_prod){
            return 0;
