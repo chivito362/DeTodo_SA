@@ -14,7 +14,7 @@ import java.util.TreeSet;
  */
 public class ConsultasPorRubro extends javax.swing.JFrame {
 
-    public TreeSet list;
+    public TreeSet<Producto> list;
     
     public ConsultasPorRubro(TreeSet list) {
         initComponents();
