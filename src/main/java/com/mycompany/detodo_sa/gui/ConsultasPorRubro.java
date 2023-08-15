@@ -114,7 +114,9 @@ public class ConsultasPorRubro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRubroActionPerformed
-      
+        for (int i = modelo.getRowCount()-1; i > 0; i--) {
+            modelo.removeRow(i);
+        }
         for (Producto object : list) {
          if (object.getRubro().equals((Categoria)cbRubro.getSelectedItem())){
       //   System.out.println(object.getDesc());
