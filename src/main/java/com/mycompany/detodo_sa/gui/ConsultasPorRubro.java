@@ -116,8 +116,8 @@ public class ConsultasPorRubro extends javax.swing.JFrame {
 
     private void cbRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRubroActionPerformed
       // borrarFilas();
-        System.out.println(Menu_General.listaProd);
-        for (Producto object : Menu_General.listaProd) {
+        System.out.println(Menu_General.ListaProd);
+        for (Producto object : Menu_General.ListaProd) {
          if (object.getRubro().equals((Categoria)cbRubro.getSelectedItem())){
       //   System.out.println(object.getDesc());
           
