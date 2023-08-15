@@ -15,14 +15,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ConsultasPorRubro extends javax.swing.JFrame {
 
-    public TreeSet list;
+    public TreeSet<Producto> list;
     private DefaultTableModel modelo = new DefaultTableModel();  
             
     public ConsultasPorRubro(TreeSet list) {
         initComponents();
-      //  this.list=list;
+        this.list=list;
         cargarcombobox();
-       // cargartabla();
         armarencabezado();
     }
 
@@ -115,9 +114,8 @@ public class ConsultasPorRubro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRubroActionPerformed
-      // borrarFilas();
-        System.out.println(Menu_General.ListaProd);
-        for (Producto object : Menu_General.ListaProd) {
+      
+        for (Producto object : list) {
          if (object.getRubro().equals((Categoria)cbRubro.getSelectedItem())){
       //   System.out.println(object.getDesc());
           
@@ -155,13 +153,5 @@ public class ConsultasPorRubro extends javax.swing.JFrame {
         jTable1.setModel(modelo);
     }
 
-    private void cargartabla() {
-        
-    }
-    private void borrarFilas(){
-    int filas=jTable1.getRowCount()-1;
-    for(;filas>=0;filas--){
-        modelo.removeRow(filas);
-    }
 }
-}
+
