@@ -56,13 +56,13 @@ public class ConsultasPorRubro extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -114,21 +114,14 @@ public class ConsultasPorRubro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRubroActionPerformed
-        for (int i = modelo.getRowCount()-1; i > 0; i--) {
-            modelo.removeRow(i);
-        }
+        resetRow();
         for (Producto object : list) {
          if (object.getRubro().equals((Categoria)cbRubro.getSelectedItem())){
-      //   System.out.println(object.getDesc());
           
             modelo.addRow(new Object []{object.getCodigo_prod(),object.getDesc(),object.getPrecio(),object.getStock()});
-            //  borrarFilas(); 
-             System.out.println(jTable1.getRowCount());
          }
         
      }
-       // System.out.println((Categoria)cbRubro.getSelectedItem());
-        // TODO add your handling code here:
     }//GEN-LAST:event_cbRubroActionPerformed
 
     
@@ -153,7 +146,14 @@ public class ConsultasPorRubro extends javax.swing.JFrame {
         modelo.addColumn("precio");
         modelo.addColumn("stock");
         jTable1.setModel(modelo);
+        resetRow();
     }
 
+    private void resetRow() {
+        for (int i = modelo.getRowCount()-1; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+    
 }
 
