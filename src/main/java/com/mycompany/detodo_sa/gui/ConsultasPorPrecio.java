@@ -48,10 +48,20 @@ public class ConsultasPorPrecio extends javax.swing.JFrame {
         jLabel2.setText("Entre $");
 
         txt1.setText("0");
+        txt1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt1KeyReleased(evt);
+            }
+        });
 
         jLabel3.setText("Y");
 
         txt2.setText("1000");
+        txt2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt2KeyReleased(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,6 +118,75 @@ public class ConsultasPorPrecio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txt1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt1KeyReleased
+        deleteRow();
+        try{
+            if(!txt1.getText().equals("")){
+        for (Producto prod : list) {
+            if(prod.getPrecio()>=Double.parseDouble(txt1.getText()) && prod.getPrecio()<=Double.parseDouble(txt2.getText()) ){
+            Object[] obj={prod.getCodigo_prod(),prod.getDesc(),prod.getPrecio(),prod.getStock()};
+            model.addRow(obj);
+            }
+        }
+        }else{
+            try{
+            deleteRow();
+             for (Producto prod : list) {
+                if(prod.getPrecio()<=Double.parseDouble(txt2.getText())){
+                    Object[] obj={prod.getCodigo_prod(),prod.getDesc(),prod.getPrecio(),prod.getStock()};
+                    model.addRow(obj);
+                }
+            }
+            }catch(NumberFormatException e){
+                cargaProduc();
+            }
+        }
+        }catch(NumberFormatException e){
+            deleteRow();
+             for (Producto prod : list) {
+                if(prod.getPrecio()>=Double.parseDouble(txt1.getText())){
+                    Object[] obj={prod.getCodigo_prod(),prod.getDesc(),prod.getPrecio(),prod.getStock()};
+                    model.addRow(obj);
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_txt1KeyReleased
+
+    private void txt2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt2KeyReleased
+        deleteRow();
+        try{
+            if(!txt2.getText().equals("")){
+        for (Producto prod : list) {
+            if(prod.getPrecio()>=Double.parseDouble(txt1.getText()) && prod.getPrecio()<=Double.parseDouble(txt2.getText()) ){
+            Object[] obj={prod.getCodigo_prod(),prod.getDesc(),prod.getPrecio(),prod.getStock()};
+            model.addRow(obj);
+            }
+        }
+        }else{
+            try{
+             deleteRow();
+             for (Producto prod : list) {
+                if(prod.getPrecio()>=Double.parseDouble(txt1.getText())){
+                    Object[] obj={prod.getCodigo_prod(),prod.getDesc(),prod.getPrecio(),prod.getStock()};
+                    model.addRow(obj);
+                }
+            }
+            }catch(NumberFormatException e){
+                cargaProduc();
+            }
+        }
+        }catch(NumberFormatException e){
+            deleteRow();
+             for (Producto prod : list) {
+                if(prod.getPrecio()<=Double.parseDouble(txt2.getText())){
+                    Object[] obj={prod.getCodigo_prod(),prod.getDesc(),prod.getPrecio(),prod.getStock()};
+                    model.addRow(obj);
+                }
+            }
+        }
+    }//GEN-LAST:event_txt2KeyReleased
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -125,9 +204,19 @@ public class ConsultasPorPrecio extends javax.swing.JFrame {
         model.setColumnIdentifiers(titles);
         jTable1.setModel(model);
         
+        cargaProduc();
+       }
+
+    private void deleteRow() {
+        for (int i = model.getRowCount()-1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+    }
+
+    private void cargaProduc() {
         for (Producto prod : list) {
             Object[] obj={prod.getCodigo_prod(),prod.getDesc(),prod.getPrecio(),prod.getStock()};
             model.addRow(obj);
         }
-       }
+    }
 }
