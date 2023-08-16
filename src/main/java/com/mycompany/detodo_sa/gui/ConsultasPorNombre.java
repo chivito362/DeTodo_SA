@@ -4,20 +4,24 @@
  */
 package com.mycompany.detodo_sa.gui;
 
+import com.mycompany.detodo_sa.logica.Producto;
 import java.util.TreeSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Sebastian
  */
 public class ConsultasPorNombre extends javax.swing.JFrame {
-public TreeSet list;
+public TreeSet<Producto> list;
+    DefaultTableModel model= new DefaultTableModel();
     /**
      * Creates new form ConsultasPorNombre
      */
     public ConsultasPorNombre(TreeSet list) {
         initComponents();
         this.list=list;
+        cargaTabla();
     }
 
     /**
@@ -35,7 +39,7 @@ public TreeSet list;
         jLabel2 = new javax.swing.JLabel();
         txt1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        Tabla = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -57,7 +61,13 @@ public TreeSet list;
 
         jLabel2.setText("Escriba los Primeros Caracteres");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        txt1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt1KeyReleased(evt);
+            }
+        });
+
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -68,7 +78,7 @@ public TreeSet list;
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(Tabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,15 +112,47 @@ public TreeSet list;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txt1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt1KeyReleased
+        deleteRow();
+        
+        for (Producto prod : list) {
+            if(prod.getDesc().startsWith(txt1.getText())){
+                Object[] obj={prod.getCodigo_prod(),prod.getDesc(),prod.getPrecio(),prod.getStock()};
+                model.addRow(obj);
+            }
+        }
+    }//GEN-LAST:event_txt1KeyReleased
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Tabla;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField txt1;
     // End of variables declaration//GEN-END:variables
+ 
+    private void cargaTabla() {
+        String[] titles={"Codigo","Descripcion","Precio","Stock"};
+        model.setColumnIdentifiers(titles);
+        Tabla.setModel(model);
+        
+        cargaProduc();
+       }
+
+    private void deleteRow() {
+        for (int i = model.getRowCount()-1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+    }
+
+    private void cargaProduc() {
+        for (Producto prod : list) {
+            Object[] obj={prod.getCodigo_prod(),prod.getDesc(),prod.getPrecio(),prod.getStock()};
+            model.addRow(obj);
+        }
+    }
 }
